@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 import bs4
 import json
+from playwright.sync_api import sync_playwright
 import re
 import requests
-
 
 
 
@@ -11,7 +11,34 @@ class HTMLParser:
 
     def __init__(self, src : str, is_link=False):
         self.source_name = src
+        possible_name_patterns = [r"(?<=(https://))[\w_-]+", r"(?<=(http://))[\w_-]+"]
+        self.ignore = ( "svg",
+                        "path",
+                        "rect",
+                        "circle",
+                        "line",
+                        "polygon",
+                        "polyline",
+                        "ellipse",
+                        "script", 
+                        "style", )
         if is_link:
+            found_name = False
+            i = 0
+            while (not found_name):
+                if (i + 1 == len(possible_name_patterns)):
+                    break
+                try:
+                    self.source_name = re.search(possible_name_patterns[i], src).group(0)
+                    found_name = True
+                    break
+                except(AttributeError):
+                    i += 1
+
+            if (not found_name):
+                self.source_name = "parsed_website_no_name"
+                found_name = True
+                
             self.source = requests.get(src).text
         else:
             with open(src, "r") as file:
@@ -33,12 +60,34 @@ class HTMLParser:
         values: objects of type bs4.element.Tag
         
         """
+        root = self.parser.find("html")
+        if (root == None):
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True)
+                page = browser.new_page()
+                page.goto(src)
+                page.wait_for_timeout(3000)
+
+                html = page.content()
+                browser.close()
+        self.parser = BeautifulSoup(html, "html.parser")
+        root = self.parser.find("html")
+        if (root == None):
+            raise ValueError("something went wrong")
+        self.load_in_descendants(root)
+        self.export()
 
 
-    def get_plain_text(self, tag : bs4.element.Tag, output_sep = "\n", sep=" ", strip_=True) -> None:
+    def get_plain_text(self, tag : bs4.element.Tag, output_sep = "\n", sep=" ", strip_=True) -> str:
         
         plain_text_string = ""
-        plain_text_string += tag.get_text(separator=sep, strip=strip_) + output_sep
+        #plain_text_string += tag.get_text(separator=sep, strip=strip_) + output_sep
+        text_in_list = tag.get_text().strip(" \t\n").split("\n")
+        plain_text_string += text_in_list[0].strip(" \t\n")
+        for line in text_in_list:
+            if line == text_in_list[0]:
+                continue
+            plain_text_string += ", " + line.strip(" \t\n")
 
         return plain_text_string
 
@@ -75,8 +124,12 @@ class HTMLParser:
         """
         generates key for param: tag
         """
+
         class_found = False
         id_found = False
+
+        if (not tag.parent):
+            return tag.name
 
         parent_part = tag.parent.name
         tag_part = tag.name
@@ -86,11 +139,11 @@ class HTMLParser:
             if (tag.get("class")):
                 class_found = True
                 classes = tag.get("class")
-                tag_part += "." + " ".join(classes)
+                tag_part += "." + ".".join(classes)
             else:
                 container_classes = self.find_container_class(tag)
                 if (container_classes):
-                    parent_part += "." + " ".join(container_classes)
+                    parent_part += "." + ".".join(container_classes)
         except (AttributeError):
             pass
             
@@ -127,6 +180,8 @@ class HTMLParser:
         children = tag.children
 
         for child in children:
+            if (child.name in self.ignore):
+                continue
             if (not isinstance(child, bs4.element.Tag)):
                 continue
             self.load_in_a_tag(child, tag_direct_children_dictionary)
@@ -140,12 +195,16 @@ class HTMLParser:
         
         puts all descendants of root into dictionary into HTMLParser.components
         '''
+        if (tag == None):
+            return
         tag_hierarchy_dictionary = {}
         key = self.generate_key(tag)
         
         descendants = tag.descendants
         
         for child in descendants:
+            if (child.name in self.ignore):
+                continue
             if (not isinstance(child, bs4.element.Tag)):
                 continue
             self.load_in_a_tag(child, tag_hierarchy_dictionary)
@@ -175,9 +234,9 @@ class HTMLParser:
                           #"raw": tag,
                           "tag": tag.name,
                           "attributes": tag.attrs,
-                          "plain text":tag.get_text().strip("\t\n").split("\n"), #TODO modulate
+                          "plain text":self.get_plain_text(tag),
                           "css selectors":self.generate_css_selectors(tag)}
-        print(container)
+        #print(container)
         return
 
     def export(self):
@@ -187,14 +246,12 @@ class HTMLParser:
 
 
 #parser = HTMLParser(src="https://www.irishstatutebook.ie/eli/2018/act/25/enacted/en/print.html", is_link=True)
-par = HTMLParser(src="website.html")
+#par = HTMLParser(src="website.html")#69a5b7a1baae6f0d37c19fe8.html
 #parser.load_in_a_tag("h1")
 #print(parser.components)
 #parser["h1"] = parser.find_tag("h1")
-tag = par.parser.find("div")
-par.load_in_direct_children(tag)
-par.export()
-
+#HTMLParser(src="69a5b7a1baae6f0d37c19fe8.html")
+HTMLParser(src="https://avery-woodlief.dev/portfolio-page/portfolio.html", is_link=True)
 #print(par.get_plain_text(tag))
 #print(parser.get_plain_text(list(parser.components.keys())[0]))
 #parser.load_in_descendants("script")
