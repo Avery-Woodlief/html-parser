@@ -60,23 +60,26 @@ class HTMLParser:
         values: objects of type bs4.element.Tag
         
         """
-        root = self.parser.find("html")
+        html = self.parser.find("html")
         body = self.parser.find("body")
-        if (root == None):
+        if (html == None):
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=True)
                 page = browser.new_page()
                 page.goto(src)
                 page.wait_for_timeout(3000)
 
-                html = page.content()
-                self.parser = BeautifulSoup(html, "html.parser")
+                html_ = page.content()
+                self.parser = BeautifulSoup(html_, "html.parser")
                 browser.close()
                 root = self.parser.find("html")
                 body = self.parser.find("body")
-                if (root == None):
+                if (html == None):
                     raise ValueError("something went wrong")
-        self.load_in_descendants(body)
+        self.html = html
+        self.body = body
+        self.root = self.parser
+        self.load_in_descendants(self.html)
         self.export()
 
 
