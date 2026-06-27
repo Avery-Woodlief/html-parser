@@ -10,6 +10,7 @@ import requests
 class HTMLParser:
 
     def __init__(self, src : str, is_link=False):
+        self.source_name = src
         if is_link:
             self.source = requests.get(src).text
         else:
@@ -174,10 +175,15 @@ class HTMLParser:
                           #"raw": tag,
                           "tag": tag.name,
                           "attributes": tag.attrs,
-                          "plain text":tag.get_text().strip("\t\n").split("\n"),
+                          "plain text":tag.get_text().strip("\t\n").split("\n"), #TODO modulate
                           "css selectors":self.generate_css_selectors(tag)}
         print(container)
         return
+
+    def export(self):
+        with open(f"{self.source_name}.json", "w") as file:
+            json.dump(self.components, file, indent=4)
+        file.close()
 
 
 #parser = HTMLParser(src="https://www.irishstatutebook.ie/eli/2018/act/25/enacted/en/print.html", is_link=True)
@@ -187,6 +193,7 @@ par = HTMLParser(src="website.html")
 #parser["h1"] = parser.find_tag("h1")
 tag = par.parser.find("div")
 par.load_in_direct_children(tag)
+par.export()
 
 #print(par.get_plain_text(tag))
 #print(parser.get_plain_text(list(parser.components.keys())[0]))
