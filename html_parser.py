@@ -61,6 +61,7 @@ class HTMLParser:
         
         """
         root = self.parser.find("html")
+        body = self.parser.find("body")
         if (root == None):
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=True)
@@ -69,12 +70,13 @@ class HTMLParser:
                 page.wait_for_timeout(3000)
 
                 html = page.content()
+                self.parser = BeautifulSoup(html, "html.parser")
                 browser.close()
-        self.parser = BeautifulSoup(html, "html.parser")
-        root = self.parser.find("html")
-        if (root == None):
-            raise ValueError("something went wrong")
-        self.load_in_descendants(root)
+                root = self.parser.find("html")
+                body = self.parser.find("body")
+                if (root == None):
+                    raise ValueError("something went wrong")
+        self.load_in_descendants(body)
         self.export()
 
 
@@ -244,21 +246,8 @@ class HTMLParser:
             json.dump(self.components, file, indent=4)
         file.close()
 
-
-#parser = HTMLParser(src="https://www.irishstatutebook.ie/eli/2018/act/25/enacted/en/print.html", is_link=True)
-#par = HTMLParser(src="website.html")#69a5b7a1baae6f0d37c19fe8.html
-#parser.load_in_a_tag("h1")
-#print(parser.components)
-#parser["h1"] = parser.find_tag("h1")
-#HTMLParser(src="69a5b7a1baae6f0d37c19fe8.html")
-HTMLParser(src="https://avery-woodlief.dev/portfolio-page/portfolio.html", is_link=True)
-#print(par.get_plain_text(tag))
-#print(parser.get_plain_text(list(parser.components.keys())[0]))
-#parser.load_in_descendants("script")
-#print(parser.get_plain_text("div"))
-#print(parser.components.keys())
-#key=list(parser.components.keys())[0]
-#print(parser[key].prettify())
-#print(parser.get_plain_text("h1"))
-#print(parser.find_tag("h1").prettify())
-#print(parser.components)
+source=input("")
+if re.search(r"https|http", source):
+    HTMLParser(src=source, is_link=True)
+else:
+    HTMLParser(src=source)
