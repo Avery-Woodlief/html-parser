@@ -110,24 +110,33 @@ class HTMLParser:
     def passes_selection(self, tag : bs4.element.Tag) -> bool:
         if (not isinstance(tag, bs4.element.Tag)):
             return True
+
+        passed_name = False
+        passed_class_ = False
+        passed_id_ = False
         
         if (len(self.selective_tags) > 0):
             for selective_tag in self.selective_tags:
                 if (re.fullmatch(rf"{selective_tag}", tag.name)):
-                    return True
+                    passed_name = True
+                    break
+        else:
+            passed_name = True
         if (tag.get("class") and (len(self.selective_classes) > 0)):
             for class_ in tag.get("class"):
-                for selective_class_ in self.selective_classes:
-                    if (re.fullmatch(rf"{selective_class}", class_)):
-                        return True
-            return False
+                if (class_ in self.selective_classes):
+                    passed_class_ = True
+                    break
+        elif (len(self.selective_classes) == 0):
+            passed_class_ = True
         if (tag.get("id") and (len(self.selective_ids) > 0)):
             for id_ in tag.get("id"):
-                for selective_id_ in self.selective_ids:
-                    if (re.fullmatch(rf"{selective_id_}", id_)):
-                        return True
-            return False
-        return False
+                if (id_ in self.selective_ids):
+                    passed_id_ = True
+                    break
+        elif (len(self.selective_ids) == 0):
+            passed_id_ = True
+        return (passed_name and passed_class_ and passed_id_)
 
 
     def get_plain_text(self, tag : bs4.element.Tag, output_sep = "\n", sep=" ", strip_=True) -> str:
@@ -354,7 +363,7 @@ tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse"
 
 source=input("")
 if re.search(r"https|http", source):
-    parser=HTMLParser(src=source, is_link=True, only_look_for_tags=("big",))
+    parser=HTMLParser(src=source, is_link=True, only_look_for_classes=("act-content", "smallcaps"))
     parser.selective_parse()
 else:
     HTMLParser(src=source, tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","tr", "table", "hr", "b", "div", "p", "td", "a", "ol", "li", "ul", "header", "nav", "footer", "i", "img", "header", "search", "span", "input", "form", "section", "main", "option", "cite", "select", "label", "h1", "button"), classes_ignored=("smallcaps"))
