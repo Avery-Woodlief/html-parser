@@ -4,44 +4,49 @@ import json
 from playwright.sync_api import sync_playwright
 import re
 import requests
+from urllib.parse import urlparse
+
 
 
 
 class HTMLParser:
+    '''
+    Good for single page parsing
+    '''
 
-    def __init__(   self, src : str, is_link=False,
-                    tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","img", "i"),
-                    classes_ignored=tuple(), ids_ignored=tuple(), 
-                    only_look_for_tags=tuple(), only_look_for_classes=tuple(), only_look_for_ids=tuple()):
+    def __init__(   self, src : str,
+                    tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","img", "i", "div", "span", "td", "tr"),
+                    classes_ignored=tuple(), 
+                    ids_ignored=tuple(), 
+                    only_look_for_tags=tuple(), 
+                    only_look_for_classes=tuple(), 
+                    only_look_for_ids=tuple()):
+
         self.source_name = src
+        """
         possible_name_patterns = [  
                                     r"(?<=(https://www.))[\w_-]+",
                                     r"(?<=(http://www.))[\w_-]+",
                                     r"(?<=(https://))[\w_-]+",
                                     r"(?<=(http://))[\w_-]+"
                                  ]
+        """
         self.ignore_tags = tags_ignored
         self.ignore_classes = classes_ignored
         self.ignore_ids = ids_ignored
         self.selective_tags = only_look_for_tags
         self.selective_classes = only_look_for_classes
         self.selective_ids = only_look_for_ids
+        is_link = False
+        result = urlparse(src)
+        if (result.scheme in ("https", "http")):
+            is_link = True
+            self.source_name = result.netloc
+            if (re.search(r"(?<=[.])\w+(?=[.])", self.source_name)):
+                self.source_name = re.search(r"(?<=[.])\w+(?=[.])", self.source_name).group(0)
+            else:
+                self.source_name = "no_name_site"
         if is_link:
-            found_name = False
-            i = 0
-            while (not found_name):
-                if (i + 1 == len(possible_name_patterns)):
-                    break
-                try:
-                    self.source_name = re.search(possible_name_patterns[i], src).group(0)
-                    found_name = True
-                    break
-                except(AttributeError):
-                    i += 1
-
-            if (not found_name):
-                self.source_name = "parsed_website_no_name"
-                found_name = True
                 
             self.source = requests.get(src).text
         else:
@@ -355,15 +360,17 @@ class HTMLParser:
             json.dump(self.components, file, indent=4)
         file.close()
 
-"""
-tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","tr", "table", "hr", "b", "div", "p", "td", "a", "ol", "li", "ul", "header", "nav", "footer", "i", "img", "header", "search", "span", "input", "form", "section", "main", "option", "cite", "select", "label", "h1", "button")
-"""
+
+
+
 
 # example usage
 
+"""
 source=input("")
 if re.search(r"https|http", source):
-    parser=HTMLParser(src=source, is_link=True, only_look_for_classes=("act-content", "smallcaps"))
+    parser=HTMLParser(src=source, only_look_for_classes=("act-content", "smallcaps"))
     parser.selective_parse()
 else:
     HTMLParser(src=source, tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","tr", "table", "hr", "b", "div", "p", "td", "a", "ol", "li", "ul", "header", "nav", "footer", "i", "img", "header", "search", "span", "input", "form", "section", "main", "option", "cite", "select", "label", "h1", "button"), classes_ignored=("smallcaps"))
+"""
