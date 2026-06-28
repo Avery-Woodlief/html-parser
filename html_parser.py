@@ -9,19 +9,23 @@ import requests
 
 class HTMLParser:
 
-    def __init__(self, src : str, is_link=False):
+    def __init__(   self, src : str, is_link=False,
+                    tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","img", "i"),
+                    classes_ignored=tuple(), ids_ignored=tuple(), 
+                    only_look_for_tags=tuple(), only_look_for_classes=tuple(), only_look_for_ids=tuple()):
         self.source_name = src
-        possible_name_patterns = [r"(?<=(https://))[\w_-]+", r"(?<=(http://))[\w_-]+"]
-        self.ignore = ( "svg",
-                        "path",
-                        "rect",
-                        "circle",
-                        "line",
-                        "polygon",
-                        "polyline",
-                        "ellipse",
-                        "script", 
-                        "style", )
+        possible_name_patterns = [  
+                                    r"(?<=(https://www.))[\w_-]+",
+                                    r"(?<=(http://www.))[\w_-]+",
+                                    r"(?<=(https://))[\w_-]+",
+                                    r"(?<=(http://))[\w_-]+"
+                                 ]
+        self.ignore_tags = tags_ignored
+        self.ignore_classes = classes_ignored
+        self.ignore_ids = ids_ignored
+        self.selective_tags = only_look_for_tags
+        self.selective_classes = only_look_for_classes
+        self.selective_ids = only_look_for_ids
         if is_link:
             found_name = False
             i = 0
@@ -79,14 +83,56 @@ class HTMLParser:
         self.html = html
         self.body = body
         self.root = self.parser
-        self.load_in_descendants(self.body)
+        
+    def standard_parse(self):
+        self.load_in_descendants(self.body, False)
         self.export()
+
+    def selective_parse(self):
+        self.load_in_descendants(self.body, True)
+        self.export()
+
+    def is_ignored(self, tag : bs4.element.Tag) -> bool:
+        if (not isinstance(tag, bs4.element.Tag)):
+            return False
+        if (tag.name in self.ignore_tags):
+            return True
+        if (tag.get("class")):
+            for class_ in tag.get("class"):
+                if class_ in self.ignore_classes:
+                    return True
+        if (tag.get("id")):
+            for id_ in tag.get("id"):
+                if id_ in self.ignore_ids:
+                    return True
+        return False
+
+    def passes_selection(self, tag : bs4.element.Tag) -> bool:
+        if (not isinstance(tag, bs4.element.Tag)):
+            return True
+        
+        if (len(self.selective_tags) > 0):
+            for selective_tag in self.selective_tags:
+                if (re.fullmatch(rf"{selective_tag}", tag.name)):
+                    return True
+        if (tag.get("class") and (len(self.selective_classes) > 0)):
+            for class_ in tag.get("class"):
+                for selective_class_ in self.selective_classes:
+                    if (re.fullmatch(rf"{selective_class}", class_)):
+                        return True
+            return False
+        if (tag.get("id") and (len(self.selective_ids) > 0)):
+            for id_ in tag.get("id"):
+                for selective_id_ in self.selective_ids:
+                    if (re.fullmatch(rf"{selective_id_}", id_)):
+                        return True
+            return False
+        return False
 
 
     def get_plain_text(self, tag : bs4.element.Tag, output_sep = "\n", sep=" ", strip_=True) -> str:
         
         plain_text_string = ""
-        #plain_text_string += tag.get_text(separator=sep, strip=strip_) + output_sep
         text_in_list = tag.get_text().strip(" \t\n").split("\n")
         plain_text_string += text_in_list[0].strip(" \t\n")
         for line in text_in_list:
@@ -121,7 +167,7 @@ class HTMLParser:
 
     def find_tag_from_classes(self, classes : list) -> bs4.element.Tag:
         for tag in self.root.find_all():
-            if (tag.name in self.ignore):
+            if (self.is_ignored(tag)):
                 continue
             if (tag.get("class") == classes):
                 return tag
@@ -129,7 +175,7 @@ class HTMLParser:
 
     def find_tag_from_id(self, ids : list) -> bs4.element.Tag:
         for tag in self.root.find_all():
-            if (tag.name in self.ignore):
+            if (self.is_ignored(tag)):
                 continue
             if (tag.get("id") == ids):
                 return tag
@@ -142,10 +188,13 @@ class HTMLParser:
 
     
 
-    def generate_key(self, tag : bs4.element.Tag) -> str:
+    def generate_key(self, tag : bs4.element.Tag, container : dict) -> str:
         """
         generates key for param: tag
-        the key generated is a valid css selector for the given tag
+        param: container is used to check if generated key already exists
+        part of the key generated is a valid css selector for the given tag
+        the other part of the generated key is to prevent overwriting other keys with the same classname/id under the same parent and same tag 
+                                                                                 or under same first elder with same classname/id and same tag.
         """
 
         class_found = False
@@ -205,30 +254,36 @@ class HTMLParser:
             else:
                 key = parent_part + " " + tag_part
 
+        if key in container.keys():
+            addr = re.search(r"(?<=0x)[\w]+(?=[>])", str(key.__hash__)).group(0) # uses memory address as attempt to make key unique
+            key += f"%{addr}"
+
         return key
 
-    def load_in_direct_children(self, tag : bs4.element.Tag) -> None:
+    def load_in_direct_children(self, tag : bs4.element.Tag, selective : bool) -> None:
         '''
         param tag: bs4.element.Tag root tag to start from
         
         puts direct children of root into dictionary into HTMLParser.components
         '''
         tag_direct_children_dictionary = {}
-        key = self.generate_key(tag)
+        key = self.generate_key(tag, tag_direct_children_dictionary)
 
         children = tag.children
 
         for child in children:
-            if (child.name in self.ignore):
-                continue
-            if (not isinstance(child, bs4.element.Tag)):
-                continue
+            if (not selective):
+                if (self.is_ignored(child)):
+                    continue
+            else:
+                if (not self.passes_selection(child)):
+                    continue
             self.load_in_a_tag(child, tag_direct_children_dictionary)
         self.components[key + " DIRECT CHILDREN"] = tag_direct_children_dictionary
         return
 
 
-    def load_in_descendants(self, tag : bs4.element.Tag) -> None:
+    def load_in_descendants(self, tag : bs4.element.Tag, selective : bool) -> None:
         '''
         param tag: bs4.element.Tag root tag to start from
         
@@ -237,26 +292,34 @@ class HTMLParser:
         if (tag == None):
             return
         tag_hierarchy_dictionary = {}
-        key = self.generate_key(tag)
+        key = self.generate_key(tag, tag_hierarchy_dictionary)
         
         descendants = tag.descendants
         
         for child in descendants:
-            if (child.name in self.ignore):
-                continue
+            if (not selective):
+                if (self.is_ignored(child)):
+                    continue
+            else:
+                if (not self.passes_selection(child)):
+                    continue
             if (not isinstance(child, bs4.element.Tag)):
                 continue
             self.load_in_a_tag(child, tag_hierarchy_dictionary)
         self.components[key + " DESCENDANTS"] = tag_hierarchy_dictionary
         return
 
-    def generate_css_selectors(self, tag : bs4.element.Tag) -> list:
-        css_selectors = [tag.name + "." + f"{'.'.join(tag.get('class'))}" if tag.get("class") else "", 
-                         tag.name + "#" + f"{''.join(tag.get('id'))}" if tag.get("id") else "",
-                         tag.parent.name + "." + f"{'.'.join(tag.parent.get('class'))}" + " > " + tag.name + "." + f"{'.'.join(tag.get('class'))}" if (tag.parent.get("class") and tag.get('class')) else "",
-                         tag.parent.name + "." + f"{'.'.join(tag.parent.get('class'))}" + " > " + tag.name + "#" + f"{''.join(tag.get('id'))}" if (tag.parent.get("class") and tag.get('id')) else "",
-                         tag.parent.name + "#" + f"{''.join(tag.parent.get('id'))}" + " > " + tag.name + "." + f"{'.'.join(tag.get('class'))}" if (tag.parent.get("id") and tag.get('class')) else "",
-                         tag.parent.name + "#" + f"{''.join(tag.parent.get('id'))}" + " > " + tag.name + "#" + f"{''.join(tag.get('id'))}" if (tag.parent.get("id") and tag.get('id')) else ""]
+    def generate_css_selectors(self, tag : bs4.element.Tag, container : list) -> list:
+        key = self.generate_key(tag, container)
+        css_selectors = [   
+                            tag.name + "." + f"{'.'.join(tag.get('class'))}" if tag.get("class") else "", 
+                            tag.name + "#" + f"{''.join(tag.get('id'))}" if tag.get("id") else "",
+                            tag.parent.name + "." + f"{'.'.join(tag.parent.get('class'))}" + " > " + tag.name + "." + f"{'.'.join(tag.get('class'))}" if (tag.parent.get("class") and tag.get('class')) else "",
+                            tag.parent.name + "." + f"{'.'.join(tag.parent.get('class'))}" + " > " + tag.name + "#" + f"{''.join(tag.get('id'))}" if (tag.parent.get("class") and tag.get('id')) else "",
+                            tag.parent.name + "#" + f"{''.join(tag.parent.get('id'))}" + " > " + tag.name + "." + f"{'.'.join(tag.get('class'))}" if (tag.parent.get("id") and tag.get('class')) else "",
+                            tag.parent.name + "#" + f"{''.join(tag.parent.get('id'))}" + " > " + tag.name + "#" + f"{''.join(tag.get('id'))}" if (tag.parent.get("id") and tag.get('id')) else "",
+                            key[:key.index("%")] if ("%" in key) else key
+                        ]
 
         while ("" in css_selectors):
             css_selectors.remove("")
@@ -268,13 +331,13 @@ class HTMLParser:
     def load_in_a_tag(self, tag : bs4.element.Tag, container : dict) -> None:
         #tag = self.parser.find(tag_name)
             
-        key = self.generate_key(tag)
+        key = self.generate_key(tag, container)
         container[key] = {"parent": tag.parent.name,
                           #"raw": tag,
                           "tag": tag.name,
                           "attributes": tag.attrs,
                           "plain text":self.get_plain_text(tag),
-                          "css selectors":self.generate_css_selectors(tag)}
+                          "css selectors":self.generate_css_selectors(tag, container)}
         #print(container)
         return
 
@@ -283,8 +346,15 @@ class HTMLParser:
             json.dump(self.components, file, indent=4)
         file.close()
 
+"""
+tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","tr", "table", "hr", "b", "div", "p", "td", "a", "ol", "li", "ul", "header", "nav", "footer", "i", "img", "header", "search", "span", "input", "form", "section", "main", "option", "cite", "select", "label", "h1", "button")
+"""
+
+# example usage
+
 source=input("")
 if re.search(r"https|http", source):
-    HTMLParser(src=source, is_link=True)
+    parser=HTMLParser(src=source, is_link=True, only_look_for_tags=("big",))
+    parser.selective_parse()
 else:
-    HTMLParser(src=source)
+    HTMLParser(src=source, tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","tr", "table", "hr", "b", "div", "p", "td", "a", "ol", "li", "ul", "header", "nav", "footer", "i", "img", "header", "search", "span", "input", "form", "section", "main", "option", "cite", "select", "label", "h1", "button"), classes_ignored=("smallcaps"))
