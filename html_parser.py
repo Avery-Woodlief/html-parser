@@ -1,10 +1,12 @@
 from bs4 import BeautifulSoup
 import bs4
 import json
+from pathlib import Path
 from playwright.sync_api import sync_playwright
 import re
 import requests
 from urllib.parse import urlparse
+from urllib.parse import urljoin
 
 
 
@@ -47,9 +49,11 @@ class HTMLParser:
             else:
                 self.source_name = "no_name_site"
         if is_link:
-                
+            self.url = src
+            self.image_links = []
             self.source = requests.get(src).text
         else:
+            self.url = None
             with open(src, "r") as file:
                 self.source = file.read()
         self.parser = BeautifulSoup(self.source, "html.parser")
@@ -293,7 +297,7 @@ class HTMLParser:
                 if (not self.passes_selection(child)):
                     continue
             self.load_in_a_tag(child, tag_direct_children_dictionary)
-        self.components[key + " DIRECT CHILDREN"] = tag_direct_children_dictionary
+        self.components[key + ".//"] = tag_direct_children_dictionary
         return
 
 
@@ -320,7 +324,7 @@ class HTMLParser:
             if (not isinstance(child, bs4.element.Tag)):
                 continue
             self.load_in_a_tag(child, tag_hierarchy_dictionary)
-        self.components[key + " DESCENDANTS"] = tag_hierarchy_dictionary
+        self.components[key + ".//*"] = tag_hierarchy_dictionary
         return
 
     def generate_css_selectors(self, tag : bs4.element.Tag, container : list) -> list:
@@ -352,6 +356,9 @@ class HTMLParser:
                           "attributes": tag.attrs,
                           "plain text":self.get_plain_text(tag),
                           "css selectors":self.generate_css_selectors(tag, container)}
+        if tag.name == "img" and self.url:
+            container[key]["url to img"] = img_url = urljoin(self.url, tag["src"])
+            self.image_links.append(img_url)
         #print(container)
         return
 
@@ -359,6 +366,18 @@ class HTMLParser:
         with open(f"{self.source_name}.json", "w") as file:
             json.dump(self.components, file, indent=4)
         file.close()
+        if (self.url):
+            Path(f"{self.source_name}_images").mkdir(exist_ok=True)
+            for img_link in self.image_links:
+            
+                response = requests.get(img_link)
+                try:
+                    img_name = re.search(r"[\w.]+(.png|.jpg|.jpeg)", img_link).group(0)
+                except (AttributeError):
+                    continue
+                #print(img_name)
+                with open(f"{self.source_name}_images/{img_name}", "wb") as f:
+                    f.write(response.content)
 
 
 
@@ -366,11 +385,7 @@ class HTMLParser:
 
 # example usage
 
-"""
+
 source=input("")
-if re.search(r"https|http", source):
-    parser=HTMLParser(src=source, only_look_for_classes=("act-content", "smallcaps"))
-    parser.selective_parse()
-else:
-    HTMLParser(src=source, tags_ignored=("svg","path","rect","circle","line","polygon","polyline","ellipse","script","style","tr", "table", "hr", "b", "div", "p", "td", "a", "ol", "li", "ul", "header", "nav", "footer", "i", "img", "header", "search", "span", "input", "form", "section", "main", "option", "cite", "select", "label", "h1", "button"), classes_ignored=("smallcaps"))
-"""
+parser=HTMLParser(src=source, only_look_for_tags=("img",))
+parser.selective_parse()
