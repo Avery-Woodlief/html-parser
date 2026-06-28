@@ -162,7 +162,7 @@
                 "a.skip-link"
             ]
         },
-        "li.breadcrumb.hidden-xs.header-crumbs > a": {
+        "ol.breadcrumb.hidden-xs.header-crumbs a": {
             "parent": "li",
             "tag": "a",
             "attributes": {
@@ -374,7 +374,7 @@
             "plain text": "Produced by the Office of the Attorney General",
             "css selectors": []
         },
-        "p.english_language > a": {
+        "div.english_language a": {
             "parent": "p",
             "tag": "a",
             "attributes": {
@@ -391,7 +391,7 @@
             "plain text": "T\u00e1irgthe ag Oifig an Ard-Aighne",
             "css selectors": []
         },
-        "p.irish_language > a": {
+        "div.irish_language a": {
             "parent": "p",
             "tag": "a",
             "attributes": {
@@ -467,7 +467,7 @@
             "plain text": "CCanna (Ceisteanna Coitianta)",
             "css selectors": []
         },
-        "li.nav.nav-pills > a": {
+        "ul.nav.nav-pills a": {
             "parent": "li",
             "tag": "a",
             "attributes": {
@@ -530,7 +530,7 @@
             "plain text": "Dl\u00ed AE (EUR-Lex)",
             "css selectors": []
         },
-        "li.dropdown-menu > a": {
+        "ul.dropdown-menu a": {
             "parent": "li",
             "tag": "a",
             "attributes": {
@@ -669,7 +669,7 @@
                 "form#simple_search_form > div.form-group.column-2"
             ]
         },
-        "div#simple_search_form > div.column-label": {
+        "form#simple_search_form div.column-label": {
             "parent": "div",
             "tag": "div",
             "attributes": {
@@ -683,7 +683,7 @@
                 "div.form-group.column-4 > div.column-label"
             ]
         },
-        "div.column-label#simple_search_form > label": {
+        "form#simple_search_form label": {
             "parent": "div",
             "tag": "label",
             "attributes": {
@@ -693,8 +693,8 @@
             "plain text": "TypeCine\u00c3\u00a1l",
             "css selectors": []
         },
-        "label#simple_search_form > span.english_language": {
-            "parent": "label",
+        "form#simple_search_form span.english_language": {
+            "parent": "a",
             "tag": "span",
             "attributes": {
                 "class": [
@@ -702,13 +702,14 @@
                 ],
                 "lang": "en"
             },
-            "plain text": "Type",
+            "plain text": "Advanced Search",
             "css selectors": [
-                "span.english_language"
+                "span.english_language",
+                "a.link-advanced-options > span.english_language"
             ]
         },
-        "label#simple_search_form > span.irish_language": {
-            "parent": "label",
+        "form#simple_search_form span.irish_language": {
+            "parent": "a",
             "tag": "span",
             "attributes": {
                 "class": [
@@ -716,12 +717,13 @@
                 ],
                 "lang": "ga"
             },
-            "plain text": "Cine\u00c3\u00a1l",
+            "plain text": "Cuardach Casta",
             "css selectors": [
-                "span.irish_language"
+                "span.irish_language",
+                "a.link-advanced-options > span.irish_language"
             ]
         },
-        "div#simple_search_form > div.column-field": {
+        "form#simple_search_form div.column-field": {
             "parent": "div",
             "tag": "div",
             "attributes": {
@@ -820,7 +822,7 @@
                 "div.column-field > select#header-search-type"
             ]
         },
-        "select.form-control > option#ss_all": {
+        "input.form-control option#ss_all": {
             "parent": "select",
             "tag": "option",
             "attributes": {
@@ -834,7 +836,7 @@
                 "select#header-search-type > option#ss_all"
             ]
         },
-        "select.form-control > option#ss_acts": {
+        "input.form-control option#ss_acts": {
             "parent": "select",
             "tag": "option",
             "attributes": {
@@ -848,7 +850,7 @@
                 "select#header-search-type > option#ss_acts"
             ]
         },
-        "select.form-control > option#ss_si": {
+        "input.form-control option#ss_si": {
             "parent": "select",
             "tag": "option",
             "attributes": {
@@ -876,7 +878,7 @@
                 "form#simple_search_form > div.column-5"
             ]
         },
-        "div#simple_search_form > button.btn.btn-default.xs-pull-right.english_language": {
+        "form#simple_search_form button.btn.btn-default.xs-pull-right.english_language": {
             "parent": "div",
             "tag": "button",
             "attributes": {
@@ -896,7 +898,7 @@
                 "div.column-5 > button.btn.btn-default.xs-pull-right.english_language"
             ]
         },
-        "button#simple_search_form > i.fa.fa-search": {
+        "form#simple_search_form i.fa.fa-search": {
             "parent": "button",
             "tag": "i",
             "attributes": {
@@ -912,7 +914,7 @@
                 "button.btn.btn-default.xs-pull-right.irish_language > i.fa.fa-search"
             ]
         },
-        "div#simple_search_form > button.btn.btn-default.xs-pull-right.irish_language": {
+        "form#simple_search_form button.btn.btn-default.xs-pull-right.irish_language": {
             "parent": "div",
             "tag": "button",
             "attributes": {
@@ -947,7 +949,7 @@
                 "form#simple_search_form > div.form-group.column-1"
             ]
         },
-        "div#simple_search_form > a.link-advanced-options": {
+        "form#simple_search_form a.link-advanced-options": {
             "parent": "div",
             "tag": "a",
             "attributes": {
@@ -961,36 +963,6 @@
             "css selectors": [
                 "a.link-advanced-options",
                 "div.form-group.column-1 > a.link-advanced-options"
-            ]
-        },
-        "a#simple_search_form > span.english_language": {
-            "parent": "a",
-            "tag": "span",
-            "attributes": {
-                "class": [
-                    "english_language"
-                ],
-                "lang": "en"
-            },
-            "plain text": "Advanced Search",
-            "css selectors": [
-                "span.english_language",
-                "a.link-advanced-options > span.english_language"
-            ]
-        },
-        "a#simple_search_form > span.irish_language": {
-            "parent": "a",
-            "tag": "span",
-            "attributes": {
-                "class": [
-                    "irish_language"
-                ],
-                "lang": "ga"
-            },
-            "plain text": "Cuardach Casta",
-            "css selectors": [
-                "span.irish_language",
-                "a.link-advanced-options > span.irish_language"
             ]
         },
         "div.page-container > main": {
@@ -1077,23 +1049,23 @@
                 "div.col-md-12 > ol.breadcrumb"
             ]
         },
-        "ol.breadcrumb#container-fluid > li": {
-            "parent": "ol",
+        "div#container-fluid li": {
+            "parent": "ul",
             "tag": "li",
             "attributes": {},
-            "plain text": "2018",
+            "plain text": "Permanent, Page URL",
             "css selectors": []
         },
-        "li.breadcrumb#container-fluid > a": {
+        "div#container-fluid a": {
             "parent": "li",
             "tag": "a",
             "attributes": {
-                "href": "/2018/2018.html"
+                "href": "index.html"
             },
-            "plain text": "2018",
+            "plain text": "Markets in Financial Instruments Act 2018",
             "css selectors": []
         },
-        "a#container-fluid > span.english_language": {
+        "div#container-fluid span.english_language": {
             "parent": "a",
             "tag": "span",
             "attributes": {
@@ -1106,7 +1078,7 @@
                 "span.english_language"
             ]
         },
-        "a#container-fluid > span.irish_language": {
+        "div#container-fluid span.irish_language": {
             "parent": "a",
             "tag": "span",
             "attributes": {
@@ -1119,7 +1091,7 @@
                 "span.irish_language"
             ]
         },
-        "ol#container-fluid > li.active": {
+        "div#container-fluid li.active": {
             "parent": "ol",
             "tag": "li",
             "attributes": {
@@ -1132,15 +1104,6 @@
                 "li.active",
                 "ol.breadcrumb > li.active"
             ]
-        },
-        "li.active#container-fluid > a": {
-            "parent": "li",
-            "tag": "a",
-            "attributes": {
-                "href": "index.html"
-            },
-            "plain text": "Markets in Financial Instruments Act 2018",
-            "css selectors": []
         },
         "div#container-fluid > h1.row.content-title.col-md-12": {
             "parent": "div",
@@ -1159,7 +1122,7 @@
                 "div#container-fluid > h1.row.content-title.col-md-12"
             ]
         },
-        "h1#container-fluid > div.dropdown": {
+        "div#container-fluid div.dropdown": {
             "parent": "h1",
             "tag": "div",
             "attributes": {
@@ -1210,14 +1173,7 @@
                 "div.dropdown > ul.dropdown-menu.pull-right"
             ]
         },
-        "ul.dropdown-menu.pull-right#container-fluid > li": {
-            "parent": "ul",
-            "tag": "li",
-            "attributes": {},
-            "plain text": "Permanent, Page URL",
-            "css selectors": []
-        },
-        "li.dropdown-menu.pull-right#container-fluid > form": {
+        "div#container-fluid form": {
             "parent": "li",
             "tag": "form",
             "attributes": {
@@ -1226,7 +1182,7 @@
             "plain text": "Permanent, Page URL",
             "css selectors": []
         },
-        "form.dropdown-menu.pull-right > input#social-share-url-input": {
+        "ul.dropdown-menu.pull-right input#social-share-url-input": {
             "parent": "form",
             "tag": "input",
             "attributes": {
@@ -1240,7 +1196,7 @@
                 "input#social-share-url-input"
             ]
         },
-        "input.dropdown-menu.pull-right#social-share-url-input > span": {
+        "ul.dropdown-menu.pull-right#social-share-url-input span": {
             "parent": "input",
             "tag": "span",
             "attributes": {},
@@ -1354,7 +1310,7 @@
                 "div.col-md-9.col-sm-9 > ul.nav.nav-pills.document-toolbar"
             ]
         },
-        "ul#includedActRow > li.active": {
+        "div#includedActRow li.active": {
             "parent": "ul",
             "tag": "li",
             "attributes": {
@@ -1368,17 +1324,18 @@
                 "ul.nav.nav-pills.document-toolbar > li.active"
             ]
         },
-        "li.active#includedActRow > a": {
+        "div#includedActRow a": {
             "parent": "li",
             "tag": "a",
             "attributes": {
-                "aria-current": "page",
-                "href": "index.html"
+                "href": "https://www.oireachtas.ie/en/bills/bill/2018/36/",
+                "target": "_blank",
+                "aria-label": "Bill History - Opens in new window on Oireachtas website"
             },
-            "plain text": "View by SectionAmharc de r\u00c3\u00a9ir Ailt",
+            "plain text": "Bill History, Stair Bille",
             "css selectors": []
         },
-        "a#includedActRow > span.english_language": {
+        "div#includedActRow span.english_language": {
             "parent": "a",
             "tag": "span",
             "attributes": {
@@ -1392,7 +1349,7 @@
                 "a.btn > span.english_language"
             ]
         },
-        "a#includedActRow > span.irish_language": {
+        "div#includedActRow span.irish_language": {
             "parent": "a",
             "tag": "span",
             "attributes": {
@@ -1406,25 +1363,14 @@
                 "a.btn > span.irish_language"
             ]
         },
-        "ul.nav.nav-pills.document-toolbar#includedActRow > li": {
+        "div#includedActRow li": {
             "parent": "ul",
             "tag": "li",
             "attributes": {},
-            "plain text": "Commencement, Amendments, SIs made under the Act, Tosach Feidhme, Leasuithe, IR\u00c3\u00ad arna nd\u00c3\u00a9anamh faoin Acht",
+            "plain text": "Print Full ActPriont\u00c3\u00a1il an tAcht Ioml\u00c3\u00a1n",
             "css selectors": []
         },
-        "li.nav.nav-pills.document-toolbar#includedActRow > a": {
-            "parent": "li",
-            "tag": "a",
-            "attributes": {
-                "href": "https://www.oireachtas.ie/en/bills/bill/2018/36/",
-                "target": "_blank",
-                "aria-label": "Bill History - Opens in new window on Oireachtas website"
-            },
-            "plain text": "Bill History, Stair Bille",
-            "css selectors": []
-        },
-        "li#includedActRow > a.toolbar-bigButton": {
+        "div#includedActRow a.toolbar-bigButton": {
             "parent": "li",
             "tag": "a",
             "attributes": {
@@ -1438,7 +1384,7 @@
                 "a.toolbar-bigButton"
             ]
         },
-        "span#includedActRow > i.icon-tooltip.help": {
+        "div#includedActRow i.icon-tooltip.help": {
             "parent": "span",
             "tag": "i",
             "attributes": {
@@ -1489,14 +1435,7 @@
                 "div.col-md-3.col-sm-3.text-right > ul.nav.nav-pills.document-toolbar.md-pull-right.sm-pull-right"
             ]
         },
-        "ul.nav.nav-pills.document-toolbar.md-pull-right.sm-pull-right#includedActRow > li": {
-            "parent": "ul",
-            "tag": "li",
-            "attributes": {},
-            "plain text": "Print Full ActPriont\u00c3\u00a1il an tAcht Ioml\u00c3\u00a1n",
-            "css selectors": []
-        },
-        "li#includedActRow > a.btn": {
+        "div#includedActRow a.btn": {
             "parent": "li",
             "tag": "a",
             "attributes": {
@@ -1510,7 +1449,7 @@
                 "a.btn"
             ]
         },
-        "a#includedActRow > i.fa.fa-file-pdf-o": {
+        "div#includedActRow i.fa.fa-file-pdf-o": {
             "parent": "a",
             "tag": "i",
             "attributes": {
@@ -1526,7 +1465,7 @@
                 "a.btn > i.fa.fa-file-pdf-o"
             ]
         },
-        "a#includedActRow > i.fa.fa-print": {
+        "div#includedActRow i.fa.fa-print": {
             "parent": "a",
             "tag": "i",
             "attributes": {
@@ -1588,48 +1527,43 @@
             "plain text": "Number 25 of 2018, , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , CONTENTS, , PART 1, , , Preliminary and General, , 1. Short title, , , 2. Expenses, , , 3. Repeal, , , PART 2, , , Markets in Financial Instruments, , 4. Definition (Part 2), , , 5. Regulations concerning markets in financial instruments: provision of indictable offences, , , 6. Fees in respect of performance by Central Bank of Ireland of certain functions, , , 7. Amendment of Schedule 2 to Act of 1942, , , PART 3, , , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , 8. Amendment of section 2 of Credit Reporting Act 2013, , , 9. Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , Acts Referred to, , Central Bank Act 1942, (No. 22), , Central Bank Reform Act 2010, (No. 23), , Credit Reporting Act 2013, (No. 45), , European Communities Act 1972, (No. 27), , Financial Services and Pensions Ombudsman Act 2017, (No. 22), , Markets in Financial Instruments and Miscellaneous Provisions Act 2007, (No. 37), , , , , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , An Act to make, as respects certain regulations that concern markets in financial instruments, provision for indictable offences that carry greater maximum penalties than are permitted by the, European Communities Act 1972, ; to make provision in relation to fees in respect of the performance by the Central Bank of Ireland of certain functions; to amend Schedule 2 to the, Central Bank Act 1942, ; to amend, section 2, of the, Credit Reporting Act 2013, and the definition of \u201clong-term financial service\u201d in the, Financial Services and Pensions Ombudsman Act 2017, ; to repeal, section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, ; and to provide for related matters., , [29th October, 2018], , Be it enacted by the Oireachtas as follows:, , , , PART 1, , Preliminary and General, , , , , Short title, , , , 1. This Act may be cited as the Markets in Financial Instruments Act 2018., , , , , Expenses, , , , 2. The expenses incurred by the Minister for Finance in the administration of this Act shall, to such extent as may be sanctioned by the Minister for Public Expenditure and Reform, be paid out of moneys provided by the Oireachtas., , , , , Repeal, , , , 3., Section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, is repealed., , , , PART 2, , Markets in Financial Instruments, , , , , Definition (Part 2), , , , 4. In this Part \u201cAct of 1942\u201d means the, Central Bank Act 1942, ., , , , , Regulations concerning markets in financial instruments: provision of indictable offences, , , , 5. (1) In this section\u2014, , , , \u201crelevant offence\u201d means an offence under Regulation 119(8) or (9) of the relevant Regulations where the contravention concerned is\u2014, , , , (a) a contravention consisting of providing an investment service or performing an investment activity without the required authorisation in accordance with Regulation 5 of those Regulations,, , , , (b) a contravention of any provision of those Regulations specified in the Table to this section, or, , , , (c) a contravention consisting of a failure to comply with a requirement made, pursuant to Regulation 95(2) of those Regulations, by an authorised officer within the meaning of those Regulations;, , , , \u201crelevant Regulations\u201d means the European Union (Markets in Financial Instruments) Regulations 2017 (, S.I. No. 375 of 2017, )., , , , (2) A person who is guilty of a relevant offence shall be liable, on conviction on indictment, to a fine not exceeding \u20ac10,000,000 or imprisonment for a term not exceeding 10 years or both., , , , (3) Subsection (2) is without prejudice to any penalties provided by the relevant Regulations in respect of a summary conviction for the relevant offence., , , , Table, , , , Regulation 16, , , , Regulation 20(1), (2), (7) or (8), , , , Regulation 23(1)(k), (l) or (m), , , , Regulation 23(11), , , , Regulation 24(11), , , , Regulation 28(1), , , , Regulation 30, , , , Regulation 31, , , , Regulation 35, , , , Regulation 36, , , , Regulation 37(8), , , , Regulation 59, , , , Regulation 70(a), (d), (e) or (f), , , , , Fees in respect of performance by Central Bank of Ireland of certain functions, , , , 6. Fees shall be payable in accordance with section 32E (inserted by, section 14, of the, Central Bank Reform Act 2010, ) of the Act of 1942 in respect of the performance by the Central Bank of Ireland of its functions under the European Union (Markets in Financial Instruments) Regulations 2017., , , , , Amendment of Schedule 2 to Act of 1942, , , , 7. The Act of 1942 is amended in Part 1 of Schedule 2 by the insertion of the following:, , , , \u201c, , , , , , , , \u201d., , , , PART 3, , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , , , , Amendment of section 2 of Credit Reporting Act 2013, , , , 8., Section 2, of the, Credit Reporting Act 2013, is amended\u2014, , , , (a) in the definition of \u201ccredit\u201d in subsection (1), by the substitution of the following for paragraph (f):, , , , \u201c(f) in the form of trade credit, or\u201d,, , , , and, , , , (b) by the insertion of the following after subsection (1):, , , , \u201c(1A) For the purposes of paragraph (f) of the definition of \u2018credit\u2019 in subsection (1), a loan, deferred payment or other form of financial accommodation (the \u2018relevant credit\u2019) is provided in the form of trade credit if the following conditions are satisfied\u2014, , , , (a) in the case of both the person (the \u2018first-mentioned person\u2019) by whom, and the person to whom, the relevant credit is provided, each is acting in the course of his or her business, trade or profession,, , , , (b) the first-mentioned person is not a regulated financial services provider,, , , , (c) the terms of the relevant credit provide for repayment, whether in instalments or as a single amount, of the whole of the credit by a date that is not later than 6 months after the date of its provision, and, , , , (d) the purpose of the relevant credit is to facilitate the purchase of goods or services from the first-mentioned person.\u201d., , , , , Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , 9. (1), Section 2, (1) of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the substitution of the following for the definition of \u201clong-term financial service\u201d:, , , , \u201c \u2018long-term financial service\u2019 means\u2014, , , , (a) subject to paragraph (b) and subsection (3), a financial service the duration of which is a fixed term of 5 years and one month, or more, but, notwithstanding that the aggregate term of them may be 5 years and one month (or more), there does not fall within this paragraph a series of consecutive terms in respect of a financial service\u2019s duration (provided no individual one of them is 5 years and one month, or more, in length), or, , , , (b) a financial service that is\u2014, , , , (i) life assurance to which, by virtue of Regulation 4 of those Regulations, the European Communities (Life Assurance) Framework Regulations 1994 (, S.I. No. 360 of 1994, ) apply (not being life assurance falling within Class VII defined in the first Annex thereto), or, , , , (ii) life assurance to which the European Union (Insurance and Reinsurance) Regulations 2015 (, S.I. No. 485 of 2015, ) apply (not being life assurance falling within paragraph 7, 8 or 9 of Schedule 2 thereto),, , , , regardless, in either case, of whether the term of such life assurance is fixed at a specified calendar period or not;\u201d., , , , (2), Section 2, of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the insertion of the following after subsection (2):, , , , \u201c(3) Notwithstanding the fact that the financial service does not fix its duration to be of a term such as is referred to in paragraph (a) of the definition of \u2018long-term financial service\u2019 in subsection (1), a financial service shall be regarded as falling within that definition if it would be reasonable for a consumer to expect its duration to be of at least the length referred to in that paragraph and that reasonable expectation arises by reason of\u2014, , , , (a) the manner in which the financial service operates to provide a financial benefit to the consumer,, , , , (b) the type of assets with which its operation is connected, or, , , , (c) representations made by the financial service provider,, , , , as distinct from where such an expectation arises in the case of\u2014, , , , (i) a current account with a financial institution, or, , , , (ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
             "css selectors": []
         },
-        "table.act-content#act > tr": {
-            "parent": "table",
+        "div#act tr": {
+            "parent": "td",
             "tag": "tr",
             "attributes": {},
-            "plain text": "Number 25 of 2018, , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , CONTENTS, , PART 1, , , Preliminary and General, , 1. Short title, , , 2. Expenses, , , 3. Repeal, , , PART 2, , , Markets in Financial Instruments, , 4. Definition (Part 2), , , 5. Regulations concerning markets in financial instruments: provision of indictable offences, , , 6. Fees in respect of performance by Central Bank of Ireland of certain functions, , , 7. Amendment of Schedule 2 to Act of 1942, , , PART 3, , , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , 8. Amendment of section 2 of Credit Reporting Act 2013, , , 9. Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , Acts Referred to, , Central Bank Act 1942, (No. 22), , Central Bank Reform Act 2010, (No. 23), , Credit Reporting Act 2013, (No. 45), , European Communities Act 1972, (No. 27), , Financial Services and Pensions Ombudsman Act 2017, (No. 22), , Markets in Financial Instruments and Miscellaneous Provisions Act 2007, (No. 37), , , , , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , An Act to make, as respects certain regulations that concern markets in financial instruments, provision for indictable offences that carry greater maximum penalties than are permitted by the, European Communities Act 1972, ; to make provision in relation to fees in respect of the performance by the Central Bank of Ireland of certain functions; to amend Schedule 2 to the, Central Bank Act 1942, ; to amend, section 2, of the, Credit Reporting Act 2013, and the definition of \u201clong-term financial service\u201d in the, Financial Services and Pensions Ombudsman Act 2017, ; to repeal, section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, ; and to provide for related matters., , [29th October, 2018], , Be it enacted by the Oireachtas as follows:, , , , PART 1, , Preliminary and General, , , , , Short title, , , , 1. This Act may be cited as the Markets in Financial Instruments Act 2018., , , , , Expenses, , , , 2. The expenses incurred by the Minister for Finance in the administration of this Act shall, to such extent as may be sanctioned by the Minister for Public Expenditure and Reform, be paid out of moneys provided by the Oireachtas., , , , , Repeal, , , , 3., Section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, is repealed., , , , PART 2, , Markets in Financial Instruments, , , , , Definition (Part 2), , , , 4. In this Part \u201cAct of 1942\u201d means the, Central Bank Act 1942, ., , , , , Regulations concerning markets in financial instruments: provision of indictable offences, , , , 5. (1) In this section\u2014, , , , \u201crelevant offence\u201d means an offence under Regulation 119(8) or (9) of the relevant Regulations where the contravention concerned is\u2014, , , , (a) a contravention consisting of providing an investment service or performing an investment activity without the required authorisation in accordance with Regulation 5 of those Regulations,, , , , (b) a contravention of any provision of those Regulations specified in the Table to this section, or, , , , (c) a contravention consisting of a failure to comply with a requirement made, pursuant to Regulation 95(2) of those Regulations, by an authorised officer within the meaning of those Regulations;, , , , \u201crelevant Regulations\u201d means the European Union (Markets in Financial Instruments) Regulations 2017 (, S.I. No. 375 of 2017, )., , , , (2) A person who is guilty of a relevant offence shall be liable, on conviction on indictment, to a fine not exceeding \u20ac10,000,000 or imprisonment for a term not exceeding 10 years or both., , , , (3) Subsection (2) is without prejudice to any penalties provided by the relevant Regulations in respect of a summary conviction for the relevant offence., , , , Table, , , , Regulation 16, , , , Regulation 20(1), (2), (7) or (8), , , , Regulation 23(1)(k), (l) or (m), , , , Regulation 23(11), , , , Regulation 24(11), , , , Regulation 28(1), , , , Regulation 30, , , , Regulation 31, , , , Regulation 35, , , , Regulation 36, , , , Regulation 37(8), , , , Regulation 59, , , , Regulation 70(a), (d), (e) or (f), , , , , Fees in respect of performance by Central Bank of Ireland of certain functions, , , , 6. Fees shall be payable in accordance with section 32E (inserted by, section 14, of the, Central Bank Reform Act 2010, ) of the Act of 1942 in respect of the performance by the Central Bank of Ireland of its functions under the European Union (Markets in Financial Instruments) Regulations 2017., , , , , Amendment of Schedule 2 to Act of 1942, , , , 7. The Act of 1942 is amended in Part 1 of Schedule 2 by the insertion of the following:, , , , \u201c, , , , , , , , \u201d., , , , PART 3, , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , , , , Amendment of section 2 of Credit Reporting Act 2013, , , , 8., Section 2, of the, Credit Reporting Act 2013, is amended\u2014, , , , (a) in the definition of \u201ccredit\u201d in subsection (1), by the substitution of the following for paragraph (f):, , , , \u201c(f) in the form of trade credit, or\u201d,, , , , and, , , , (b) by the insertion of the following after subsection (1):, , , , \u201c(1A) For the purposes of paragraph (f) of the definition of \u2018credit\u2019 in subsection (1), a loan, deferred payment or other form of financial accommodation (the \u2018relevant credit\u2019) is provided in the form of trade credit if the following conditions are satisfied\u2014, , , , (a) in the case of both the person (the \u2018first-mentioned person\u2019) by whom, and the person to whom, the relevant credit is provided, each is acting in the course of his or her business, trade or profession,, , , , (b) the first-mentioned person is not a regulated financial services provider,, , , , (c) the terms of the relevant credit provide for repayment, whether in instalments or as a single amount, of the whole of the credit by a date that is not later than 6 months after the date of its provision, and, , , , (d) the purpose of the relevant credit is to facilitate the purchase of goods or services from the first-mentioned person.\u201d., , , , , Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , 9. (1), Section 2, (1) of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the substitution of the following for the definition of \u201clong-term financial service\u201d:, , , , \u201c \u2018long-term financial service\u2019 means\u2014, , , , (a) subject to paragraph (b) and subsection (3), a financial service the duration of which is a fixed term of 5 years and one month, or more, but, notwithstanding that the aggregate term of them may be 5 years and one month (or more), there does not fall within this paragraph a series of consecutive terms in respect of a financial service\u2019s duration (provided no individual one of them is 5 years and one month, or more, in length), or, , , , (b) a financial service that is\u2014, , , , (i) life assurance to which, by virtue of Regulation 4 of those Regulations, the European Communities (Life Assurance) Framework Regulations 1994 (, S.I. No. 360 of 1994, ) apply (not being life assurance falling within Class VII defined in the first Annex thereto), or, , , , (ii) life assurance to which the European Union (Insurance and Reinsurance) Regulations 2015 (, S.I. No. 485 of 2015, ) apply (not being life assurance falling within paragraph 7, 8 or 9 of Schedule 2 thereto),, , , , regardless, in either case, of whether the term of such life assurance is fixed at a specified calendar period or not;\u201d., , , , (2), Section 2, of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the insertion of the following after subsection (2):, , , , \u201c(3) Notwithstanding the fact that the financial service does not fix its duration to be of a term such as is referred to in paragraph (a) of the definition of \u2018long-term financial service\u2019 in subsection (1), a financial service shall be regarded as falling within that definition if it would be reasonable for a consumer to expect its duration to be of at least the length referred to in that paragraph and that reasonable expectation arises by reason of\u2014, , , , (a) the manner in which the financial service operates to provide a financial benefit to the consumer,, , , , (b) the type of assets with which its operation is connected, or, , , , (c) representations made by the financial service provider,, , , , as distinct from where such an expectation arises in the case of\u2014, , , , (i) a current account with a financial institution, or, , , , (ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
+            "plain text": "(ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
             "css selectors": []
         },
-        "tr.act-content#act > td": {
+        "div#act td": {
             "parent": "tr",
             "tag": "td",
-            "attributes": {},
-            "plain text": "Number 25 of 2018, , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , CONTENTS, , PART 1, , , Preliminary and General, , 1. Short title, , , 2. Expenses, , , 3. Repeal, , , PART 2, , , Markets in Financial Instruments, , 4. Definition (Part 2), , , 5. Regulations concerning markets in financial instruments: provision of indictable offences, , , 6. Fees in respect of performance by Central Bank of Ireland of certain functions, , , 7. Amendment of Schedule 2 to Act of 1942, , , PART 3, , , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , 8. Amendment of section 2 of Credit Reporting Act 2013, , , 9. Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , Acts Referred to, , Central Bank Act 1942, (No. 22), , Central Bank Reform Act 2010, (No. 23), , Credit Reporting Act 2013, (No. 45), , European Communities Act 1972, (No. 27), , Financial Services and Pensions Ombudsman Act 2017, (No. 22), , Markets in Financial Instruments and Miscellaneous Provisions Act 2007, (No. 37), , , , , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , An Act to make, as respects certain regulations that concern markets in financial instruments, provision for indictable offences that carry greater maximum penalties than are permitted by the, European Communities Act 1972, ; to make provision in relation to fees in respect of the performance by the Central Bank of Ireland of certain functions; to amend Schedule 2 to the, Central Bank Act 1942, ; to amend, section 2, of the, Credit Reporting Act 2013, and the definition of \u201clong-term financial service\u201d in the, Financial Services and Pensions Ombudsman Act 2017, ; to repeal, section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, ; and to provide for related matters., , [29th October, 2018], , Be it enacted by the Oireachtas as follows:, , , , PART 1, , Preliminary and General, , , , , Short title, , , , 1. This Act may be cited as the Markets in Financial Instruments Act 2018., , , , , Expenses, , , , 2. The expenses incurred by the Minister for Finance in the administration of this Act shall, to such extent as may be sanctioned by the Minister for Public Expenditure and Reform, be paid out of moneys provided by the Oireachtas., , , , , Repeal, , , , 3., Section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, is repealed., , , , PART 2, , Markets in Financial Instruments, , , , , Definition (Part 2), , , , 4. In this Part \u201cAct of 1942\u201d means the, Central Bank Act 1942, ., , , , , Regulations concerning markets in financial instruments: provision of indictable offences, , , , 5. (1) In this section\u2014, , , , \u201crelevant offence\u201d means an offence under Regulation 119(8) or (9) of the relevant Regulations where the contravention concerned is\u2014, , , , (a) a contravention consisting of providing an investment service or performing an investment activity without the required authorisation in accordance with Regulation 5 of those Regulations,, , , , (b) a contravention of any provision of those Regulations specified in the Table to this section, or, , , , (c) a contravention consisting of a failure to comply with a requirement made, pursuant to Regulation 95(2) of those Regulations, by an authorised officer within the meaning of those Regulations;, , , , \u201crelevant Regulations\u201d means the European Union (Markets in Financial Instruments) Regulations 2017 (, S.I. No. 375 of 2017, )., , , , (2) A person who is guilty of a relevant offence shall be liable, on conviction on indictment, to a fine not exceeding \u20ac10,000,000 or imprisonment for a term not exceeding 10 years or both., , , , (3) Subsection (2) is without prejudice to any penalties provided by the relevant Regulations in respect of a summary conviction for the relevant offence., , , , Table, , , , Regulation 16, , , , Regulation 20(1), (2), (7) or (8), , , , Regulation 23(1)(k), (l) or (m), , , , Regulation 23(11), , , , Regulation 24(11), , , , Regulation 28(1), , , , Regulation 30, , , , Regulation 31, , , , Regulation 35, , , , Regulation 36, , , , Regulation 37(8), , , , Regulation 59, , , , Regulation 70(a), (d), (e) or (f), , , , , Fees in respect of performance by Central Bank of Ireland of certain functions, , , , 6. Fees shall be payable in accordance with section 32E (inserted by, section 14, of the, Central Bank Reform Act 2010, ) of the Act of 1942 in respect of the performance by the Central Bank of Ireland of its functions under the European Union (Markets in Financial Instruments) Regulations 2017., , , , , Amendment of Schedule 2 to Act of 1942, , , , 7. The Act of 1942 is amended in Part 1 of Schedule 2 by the insertion of the following:, , , , \u201c, , , , , , , , \u201d., , , , PART 3, , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , , , , Amendment of section 2 of Credit Reporting Act 2013, , , , 8., Section 2, of the, Credit Reporting Act 2013, is amended\u2014, , , , (a) in the definition of \u201ccredit\u201d in subsection (1), by the substitution of the following for paragraph (f):, , , , \u201c(f) in the form of trade credit, or\u201d,, , , , and, , , , (b) by the insertion of the following after subsection (1):, , , , \u201c(1A) For the purposes of paragraph (f) of the definition of \u2018credit\u2019 in subsection (1), a loan, deferred payment or other form of financial accommodation (the \u2018relevant credit\u2019) is provided in the form of trade credit if the following conditions are satisfied\u2014, , , , (a) in the case of both the person (the \u2018first-mentioned person\u2019) by whom, and the person to whom, the relevant credit is provided, each is acting in the course of his or her business, trade or profession,, , , , (b) the first-mentioned person is not a regulated financial services provider,, , , , (c) the terms of the relevant credit provide for repayment, whether in instalments or as a single amount, of the whole of the credit by a date that is not later than 6 months after the date of its provision, and, , , , (d) the purpose of the relevant credit is to facilitate the purchase of goods or services from the first-mentioned person.\u201d., , , , , Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , 9. (1), Section 2, (1) of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the substitution of the following for the definition of \u201clong-term financial service\u201d:, , , , \u201c \u2018long-term financial service\u2019 means\u2014, , , , (a) subject to paragraph (b) and subsection (3), a financial service the duration of which is a fixed term of 5 years and one month, or more, but, notwithstanding that the aggregate term of them may be 5 years and one month (or more), there does not fall within this paragraph a series of consecutive terms in respect of a financial service\u2019s duration (provided no individual one of them is 5 years and one month, or more, in length), or, , , , (b) a financial service that is\u2014, , , , (i) life assurance to which, by virtue of Regulation 4 of those Regulations, the European Communities (Life Assurance) Framework Regulations 1994 (, S.I. No. 360 of 1994, ) apply (not being life assurance falling within Class VII defined in the first Annex thereto), or, , , , (ii) life assurance to which the European Union (Insurance and Reinsurance) Regulations 2015 (, S.I. No. 485 of 2015, ) apply (not being life assurance falling within paragraph 7, 8 or 9 of Schedule 2 thereto),, , , , regardless, in either case, of whether the term of such life assurance is fixed at a specified calendar period or not;\u201d., , , , (2), Section 2, of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the insertion of the following after subsection (2):, , , , \u201c(3) Notwithstanding the fact that the financial service does not fix its duration to be of a term such as is referred to in paragraph (a) of the definition of \u2018long-term financial service\u2019 in subsection (1), a financial service shall be regarded as falling within that definition if it would be reasonable for a consumer to expect its duration to be of at least the length referred to in that paragraph and that reasonable expectation arises by reason of\u2014, , , , (a) the manner in which the financial service operates to provide a financial benefit to the consumer,, , , , (b) the type of assets with which its operation is connected, or, , , , (c) representations made by the financial service provider,, , , , as distinct from where such an expectation arises in the case of\u2014, , , , (i) a current account with a financial institution, or, , , , (ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
+            "attributes": {
+                "valign": "top"
+            },
+            "plain text": "(ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
             "css selectors": []
         },
-        "td.act-content#act > p": {
+        "div#act p": {
             "parent": "td",
             "tag": "p",
             "attributes": {
-                "style": "display:block;text-align:center;margin-top:0.50em;"
+                "style": "display:block;text-indent:-1.50em;margin-left:11.50em;margin-top:0.50em;"
             },
-            "plain text": "",
+            "plain text": "(ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
             "css selectors": []
         },
-        "p.act-content#act > img": {
+        "div#act img": {
             "parent": "p",
             "tag": "img",
             "attributes": {
-                "src": "/static/images/base/harp.jpg",
-                "alt": "/static/images/base/harp.jpg",
+                "src": "/images/en.act.2018.0025.0001.jpg",
+                "alt": "/images/en.act.2018.0025.0001.jpg",
                 "quality": "GOOD"
             },
             "plain text": "",
             "css selectors": []
         },
-        "td.act-content#act > tr": {
-            "parent": "td",
-            "tag": "tr",
-            "attributes": {},
-            "plain text": "Number 25 of 2018, , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , CONTENTS, , PART 1, , , Preliminary and General, , 1. Short title, , , 2. Expenses, , , 3. Repeal, , , PART 2, , , Markets in Financial Instruments, , 4. Definition (Part 2), , , 5. Regulations concerning markets in financial instruments: provision of indictable offences, , , 6. Fees in respect of performance by Central Bank of Ireland of certain functions, , , 7. Amendment of Schedule 2 to Act of 1942, , , PART 3, , , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , 8. Amendment of section 2 of Credit Reporting Act 2013, , , 9. Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , Acts Referred to, , Central Bank Act 1942, (No. 22), , Central Bank Reform Act 2010, (No. 23), , Credit Reporting Act 2013, (No. 45), , European Communities Act 1972, (No. 27), , Financial Services and Pensions Ombudsman Act 2017, (No. 22), , Markets in Financial Instruments and Miscellaneous Provisions Act 2007, (No. 37), , , , , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , An Act to make, as respects certain regulations that concern markets in financial instruments, provision for indictable offences that carry greater maximum penalties than are permitted by the, European Communities Act 1972, ; to make provision in relation to fees in respect of the performance by the Central Bank of Ireland of certain functions; to amend Schedule 2 to the, Central Bank Act 1942, ; to amend, section 2, of the, Credit Reporting Act 2013, and the definition of \u201clong-term financial service\u201d in the, Financial Services and Pensions Ombudsman Act 2017, ; to repeal, section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, ; and to provide for related matters., , [29th October, 2018], , Be it enacted by the Oireachtas as follows:, , , , PART 1, , Preliminary and General, , , , , Short title, , , , 1. This Act may be cited as the Markets in Financial Instruments Act 2018., , , , , Expenses, , , , 2. The expenses incurred by the Minister for Finance in the administration of this Act shall, to such extent as may be sanctioned by the Minister for Public Expenditure and Reform, be paid out of moneys provided by the Oireachtas., , , , , Repeal, , , , 3., Section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, is repealed., , , , PART 2, , Markets in Financial Instruments, , , , , Definition (Part 2), , , , 4. In this Part \u201cAct of 1942\u201d means the, Central Bank Act 1942, ., , , , , Regulations concerning markets in financial instruments: provision of indictable offences, , , , 5. (1) In this section\u2014, , , , \u201crelevant offence\u201d means an offence under Regulation 119(8) or (9) of the relevant Regulations where the contravention concerned is\u2014, , , , (a) a contravention consisting of providing an investment service or performing an investment activity without the required authorisation in accordance with Regulation 5 of those Regulations,, , , , (b) a contravention of any provision of those Regulations specified in the Table to this section, or, , , , (c) a contravention consisting of a failure to comply with a requirement made, pursuant to Regulation 95(2) of those Regulations, by an authorised officer within the meaning of those Regulations;, , , , \u201crelevant Regulations\u201d means the European Union (Markets in Financial Instruments) Regulations 2017 (, S.I. No. 375 of 2017, )., , , , (2) A person who is guilty of a relevant offence shall be liable, on conviction on indictment, to a fine not exceeding \u20ac10,000,000 or imprisonment for a term not exceeding 10 years or both., , , , (3) Subsection (2) is without prejudice to any penalties provided by the relevant Regulations in respect of a summary conviction for the relevant offence., , , , Table, , , , Regulation 16, , , , Regulation 20(1), (2), (7) or (8), , , , Regulation 23(1)(k), (l) or (m), , , , Regulation 23(11), , , , Regulation 24(11), , , , Regulation 28(1), , , , Regulation 30, , , , Regulation 31, , , , Regulation 35, , , , Regulation 36, , , , Regulation 37(8), , , , Regulation 59, , , , Regulation 70(a), (d), (e) or (f), , , , , Fees in respect of performance by Central Bank of Ireland of certain functions, , , , 6. Fees shall be payable in accordance with section 32E (inserted by, section 14, of the, Central Bank Reform Act 2010, ) of the Act of 1942 in respect of the performance by the Central Bank of Ireland of its functions under the European Union (Markets in Financial Instruments) Regulations 2017., , , , , Amendment of Schedule 2 to Act of 1942, , , , 7. The Act of 1942 is amended in Part 1 of Schedule 2 by the insertion of the following:, , , , \u201c, , , , , , , , \u201d., , , , PART 3, , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , , , , Amendment of section 2 of Credit Reporting Act 2013, , , , 8., Section 2, of the, Credit Reporting Act 2013, is amended\u2014, , , , (a) in the definition of \u201ccredit\u201d in subsection (1), by the substitution of the following for paragraph (f):, , , , \u201c(f) in the form of trade credit, or\u201d,, , , , and, , , , (b) by the insertion of the following after subsection (1):, , , , \u201c(1A) For the purposes of paragraph (f) of the definition of \u2018credit\u2019 in subsection (1), a loan, deferred payment or other form of financial accommodation (the \u2018relevant credit\u2019) is provided in the form of trade credit if the following conditions are satisfied\u2014, , , , (a) in the case of both the person (the \u2018first-mentioned person\u2019) by whom, and the person to whom, the relevant credit is provided, each is acting in the course of his or her business, trade or profession,, , , , (b) the first-mentioned person is not a regulated financial services provider,, , , , (c) the terms of the relevant credit provide for repayment, whether in instalments or as a single amount, of the whole of the credit by a date that is not later than 6 months after the date of its provision, and, , , , (d) the purpose of the relevant credit is to facilitate the purchase of goods or services from the first-mentioned person.\u201d., , , , , Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , 9. (1), Section 2, (1) of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the substitution of the following for the definition of \u201clong-term financial service\u201d:, , , , \u201c \u2018long-term financial service\u2019 means\u2014, , , , (a) subject to paragraph (b) and subsection (3), a financial service the duration of which is a fixed term of 5 years and one month, or more, but, notwithstanding that the aggregate term of them may be 5 years and one month (or more), there does not fall within this paragraph a series of consecutive terms in respect of a financial service\u2019s duration (provided no individual one of them is 5 years and one month, or more, in length), or, , , , (b) a financial service that is\u2014, , , , (i) life assurance to which, by virtue of Regulation 4 of those Regulations, the European Communities (Life Assurance) Framework Regulations 1994 (, S.I. No. 360 of 1994, ) apply (not being life assurance falling within Class VII defined in the first Annex thereto), or, , , , (ii) life assurance to which the European Union (Insurance and Reinsurance) Regulations 2015 (, S.I. No. 485 of 2015, ) apply (not being life assurance falling within paragraph 7, 8 or 9 of Schedule 2 thereto),, , , , regardless, in either case, of whether the term of such life assurance is fixed at a specified calendar period or not;\u201d., , , , (2), Section 2, of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the insertion of the following after subsection (2):, , , , \u201c(3) Notwithstanding the fact that the financial service does not fix its duration to be of a term such as is referred to in paragraph (a) of the definition of \u2018long-term financial service\u2019 in subsection (1), a financial service shall be regarded as falling within that definition if it would be reasonable for a consumer to expect its duration to be of at least the length referred to in that paragraph and that reasonable expectation arises by reason of\u2014, , , , (a) the manner in which the financial service operates to provide a financial benefit to the consumer,, , , , (b) the type of assets with which its operation is connected, or, , , , (c) representations made by the financial service provider,, , , , as distinct from where such an expectation arises in the case of\u2014, , , , (i) a current account with a financial institution, or, , , , (ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
-            "css selectors": []
-        },
-        "td#act > hr.hr10": {
+        "div#act hr.hr10": {
             "parent": "td",
             "tag": "hr",
             "attributes": {
@@ -1642,63 +1576,30 @@
                 "hr.hr10"
             ]
         },
-        "hr.hr10#act > tr": {
-            "parent": "hr",
-            "tag": "tr",
-            "attributes": {},
-            "plain text": "Number 25 of 2018, , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , CONTENTS, , PART 1, , , Preliminary and General, , 1. Short title, , , 2. Expenses, , , 3. Repeal, , , PART 2, , , Markets in Financial Instruments, , 4. Definition (Part 2), , , 5. Regulations concerning markets in financial instruments: provision of indictable offences, , , 6. Fees in respect of performance by Central Bank of Ireland of certain functions, , , 7. Amendment of Schedule 2 to Act of 1942, , , PART 3, , , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , 8. Amendment of section 2 of Credit Reporting Act 2013, , , 9. Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , Acts Referred to, , Central Bank Act 1942, (No. 22), , Central Bank Reform Act 2010, (No. 23), , Credit Reporting Act 2013, (No. 45), , European Communities Act 1972, (No. 27), , Financial Services and Pensions Ombudsman Act 2017, (No. 22), , Markets in Financial Instruments and Miscellaneous Provisions Act 2007, (No. 37), , , , , MARKETS IN FINANCIAL INSTRUMENTS ACT 2018, , An Act to make, as respects certain regulations that concern markets in financial instruments, provision for indictable offences that carry greater maximum penalties than are permitted by the, European Communities Act 1972, ; to make provision in relation to fees in respect of the performance by the Central Bank of Ireland of certain functions; to amend Schedule 2 to the, Central Bank Act 1942, ; to amend, section 2, of the, Credit Reporting Act 2013, and the definition of \u201clong-term financial service\u201d in the, Financial Services and Pensions Ombudsman Act 2017, ; to repeal, section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, ; and to provide for related matters., , [29th October, 2018], , Be it enacted by the Oireachtas as follows:, , , , PART 1, , Preliminary and General, , , , , Short title, , , , 1. This Act may be cited as the Markets in Financial Instruments Act 2018., , , , , Expenses, , , , 2. The expenses incurred by the Minister for Finance in the administration of this Act shall, to such extent as may be sanctioned by the Minister for Public Expenditure and Reform, be paid out of moneys provided by the Oireachtas., , , , , Repeal, , , , 3., Section 5, of the, Markets in Financial Instruments and Miscellaneous Provisions Act 2007, is repealed., , , , PART 2, , Markets in Financial Instruments, , , , , Definition (Part 2), , , , 4. In this Part \u201cAct of 1942\u201d means the, Central Bank Act 1942, ., , , , , Regulations concerning markets in financial instruments: provision of indictable offences, , , , 5. (1) In this section\u2014, , , , \u201crelevant offence\u201d means an offence under Regulation 119(8) or (9) of the relevant Regulations where the contravention concerned is\u2014, , , , (a) a contravention consisting of providing an investment service or performing an investment activity without the required authorisation in accordance with Regulation 5 of those Regulations,, , , , (b) a contravention of any provision of those Regulations specified in the Table to this section, or, , , , (c) a contravention consisting of a failure to comply with a requirement made, pursuant to Regulation 95(2) of those Regulations, by an authorised officer within the meaning of those Regulations;, , , , \u201crelevant Regulations\u201d means the European Union (Markets in Financial Instruments) Regulations 2017 (, S.I. No. 375 of 2017, )., , , , (2) A person who is guilty of a relevant offence shall be liable, on conviction on indictment, to a fine not exceeding \u20ac10,000,000 or imprisonment for a term not exceeding 10 years or both., , , , (3) Subsection (2) is without prejudice to any penalties provided by the relevant Regulations in respect of a summary conviction for the relevant offence., , , , Table, , , , Regulation 16, , , , Regulation 20(1), (2), (7) or (8), , , , Regulation 23(1)(k), (l) or (m), , , , Regulation 23(11), , , , Regulation 24(11), , , , Regulation 28(1), , , , Regulation 30, , , , Regulation 31, , , , Regulation 35, , , , Regulation 36, , , , Regulation 37(8), , , , Regulation 59, , , , Regulation 70(a), (d), (e) or (f), , , , , Fees in respect of performance by Central Bank of Ireland of certain functions, , , , 6. Fees shall be payable in accordance with section 32E (inserted by, section 14, of the, Central Bank Reform Act 2010, ) of the Act of 1942 in respect of the performance by the Central Bank of Ireland of its functions under the European Union (Markets in Financial Instruments) Regulations 2017., , , , , Amendment of Schedule 2 to Act of 1942, , , , 7. The Act of 1942 is amended in Part 1 of Schedule 2 by the insertion of the following:, , , , \u201c, , , , , , , , \u201d., , , , PART 3, , Amendment of Enactments concerning Credit Reporting and Financial Services and Pensions Ombudsman, , , , , Amendment of section 2 of Credit Reporting Act 2013, , , , 8., Section 2, of the, Credit Reporting Act 2013, is amended\u2014, , , , (a) in the definition of \u201ccredit\u201d in subsection (1), by the substitution of the following for paragraph (f):, , , , \u201c(f) in the form of trade credit, or\u201d,, , , , and, , , , (b) by the insertion of the following after subsection (1):, , , , \u201c(1A) For the purposes of paragraph (f) of the definition of \u2018credit\u2019 in subsection (1), a loan, deferred payment or other form of financial accommodation (the \u2018relevant credit\u2019) is provided in the form of trade credit if the following conditions are satisfied\u2014, , , , (a) in the case of both the person (the \u2018first-mentioned person\u2019) by whom, and the person to whom, the relevant credit is provided, each is acting in the course of his or her business, trade or profession,, , , , (b) the first-mentioned person is not a regulated financial services provider,, , , , (c) the terms of the relevant credit provide for repayment, whether in instalments or as a single amount, of the whole of the credit by a date that is not later than 6 months after the date of its provision, and, , , , (d) the purpose of the relevant credit is to facilitate the purchase of goods or services from the first-mentioned person.\u201d., , , , , Amendment of definition of \u201clong-term financial service\u201d in Financial Services and Pensions Ombudsman Act 2017, , , , 9. (1), Section 2, (1) of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the substitution of the following for the definition of \u201clong-term financial service\u201d:, , , , \u201c \u2018long-term financial service\u2019 means\u2014, , , , (a) subject to paragraph (b) and subsection (3), a financial service the duration of which is a fixed term of 5 years and one month, or more, but, notwithstanding that the aggregate term of them may be 5 years and one month (or more), there does not fall within this paragraph a series of consecutive terms in respect of a financial service\u2019s duration (provided no individual one of them is 5 years and one month, or more, in length), or, , , , (b) a financial service that is\u2014, , , , (i) life assurance to which, by virtue of Regulation 4 of those Regulations, the European Communities (Life Assurance) Framework Regulations 1994 (, S.I. No. 360 of 1994, ) apply (not being life assurance falling within Class VII defined in the first Annex thereto), or, , , , (ii) life assurance to which the European Union (Insurance and Reinsurance) Regulations 2015 (, S.I. No. 485 of 2015, ) apply (not being life assurance falling within paragraph 7, 8 or 9 of Schedule 2 thereto),, , , , regardless, in either case, of whether the term of such life assurance is fixed at a specified calendar period or not;\u201d., , , , (2), Section 2, of the, Financial Services and Pensions Ombudsman Act 2017, is amended by the insertion of the following after subsection (2):, , , , \u201c(3) Notwithstanding the fact that the financial service does not fix its duration to be of a term such as is referred to in paragraph (a) of the definition of \u2018long-term financial service\u2019 in subsection (1), a financial service shall be regarded as falling within that definition if it would be reasonable for a consumer to expect its duration to be of at least the length referred to in that paragraph and that reasonable expectation arises by reason of\u2014, , , , (a) the manner in which the financial service operates to provide a financial benefit to the consumer,, , , , (b) the type of assets with which its operation is connected, or, , , , (c) representations made by the financial service provider,, , , , as distinct from where such an expectation arises in the case of\u2014, , , , (i) a current account with a financial institution, or, , , , (ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
-            "css selectors": []
-        },
-        "tr.hr10#act > td": {
-            "parent": "tr",
-            "tag": "td",
-            "attributes": {
-                "valign": "top"
-            },
-            "plain text": "(ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
-            "css selectors": []
-        },
-        "td.hr10#act > p": {
-            "parent": "td",
-            "tag": "p",
-            "attributes": {
-                "style": "display:block;text-indent:-1.50em;margin-left:11.50em;margin-top:0.50em;"
-            },
-            "plain text": "(ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
-            "css selectors": []
-        },
-        "p.hr10#act > i": {
+        "div#act i": {
             "parent": "p",
             "tag": "i",
             "attributes": {},
             "plain text": "Subsection (2)",
             "css selectors": []
         },
-        "td.hr10#act > tr": {
-            "parent": "td",
-            "tag": "tr",
-            "attributes": {},
-            "plain text": "(ii) any other financial service of an indefinite duration that is widely available and does not possess specialised characteristics.\u201d.",
-            "css selectors": []
-        },
-        "p.hr10#act > b": {
+        "div#act b": {
             "parent": "p",
             "tag": "b",
             "attributes": {},
             "plain text": "9.",
             "css selectors": []
         },
-        "p.hr10#act > a": {
-            "parent": "p",
+        "div#act a": {
+            "parent": "td",
             "tag": "a",
             "attributes": {
-                "href": "/2017/en/act/pub/0022/print.html",
-                "value1": ""
+                "name": "s9._p14"
             },
-            "plain text": "Financial Services and Pensions Ombudsman Act 2017",
+            "plain text": "",
             "css selectors": []
         },
-        "p#act > span.smallcaps": {
+        "div#act span.smallcaps": {
             "parent": "p",
             "tag": "span",
             "attributes": {
@@ -1711,7 +1612,7 @@
                 "span.smallcaps"
             ]
         },
-        "tr#act > td.language_link": {
+        "div#act td.language_link": {
             "parent": "tr",
             "tag": "td",
             "attributes": {
@@ -1725,38 +1626,11 @@
                 "td.language_link"
             ]
         },
-        "p.hr10#act > img": {
-            "parent": "p",
-            "tag": "img",
-            "attributes": {
-                "src": "/images/en.act.2018.0025.0001.jpg",
-                "alt": "/images/en.act.2018.0025.0001.jpg",
-                "quality": "GOOD"
-            },
-            "plain text": "",
-            "css selectors": []
-        },
-        "td.hr10#act > a": {
-            "parent": "td",
-            "tag": "a",
-            "attributes": {
-                "name": "s9._p14"
-            },
-            "plain text": "",
-            "css selectors": []
-        },
-        "p.hr10#act > big": {
+        "div#act big": {
             "parent": "p",
             "tag": "big",
             "attributes": {},
             "plain text": "PART 3",
-            "css selectors": []
-        },
-        "b.hr10#act > i": {
-            "parent": "b",
-            "tag": "i",
-            "attributes": {},
-            "plain text": "Part 2",
             "css selectors": []
         },
         "div > footer.md-col-12.footer": {
@@ -1845,14 +1719,14 @@
                 "div.irish_language > ul.inline-list.list-spacer"
             ]
         },
-        "ul.inline-list.list-spacer#includedFooter > li": {
+        "div#includedFooter li": {
             "parent": "ul",
             "tag": "li",
             "attributes": {},
             "plain text": "Liosta Fian\u00e1n",
             "css selectors": []
         },
-        "li.inline-list.list-spacer#includedFooter > a": {
+        "div#includedFooter a": {
             "parent": "li",
             "tag": "a",
             "attributes": {

@@ -72,14 +72,14 @@ class HTMLParser:
                 html_ = page.content()
                 self.parser = BeautifulSoup(html_, "html.parser")
                 browser.close()
-                root = self.parser.find("html")
+                html = self.parser.find("html")
                 body = self.parser.find("body")
                 if (html == None):
                     raise ValueError("something went wrong")
         self.html = html
         self.body = body
         self.root = self.parser
-        self.load_in_descendants(self.html)
+        self.load_in_descendants(self.body)
         self.export()
 
 
@@ -112,10 +112,27 @@ class HTMLParser:
 
         while parent and parent.name != "[document]":
             if parent.get("id"):
+                
                 return parent["id"]
 
             parent = parent.parent
 
+        return None
+
+    def find_tag_from_classes(self, classes : list) -> bs4.element.Tag:
+        for tag in self.root.find_all():
+            if (tag.name in self.ignore):
+                continue
+            if (tag.get("class") == classes):
+                return tag
+        return None
+
+    def find_tag_from_id(self, ids : list) -> bs4.element.Tag:
+        for tag in self.root.find_all():
+            if (tag.name in self.ignore):
+                continue
+            if (tag.get("id") == ids):
+                return tag
         return None
 
     def __getitem__(self, key : str) -> None:
@@ -128,6 +145,7 @@ class HTMLParser:
     def generate_key(self, tag : bs4.element.Tag) -> str:
         """
         generates key for param: tag
+        the key generated is a valid css selector for the given tag
         """
 
         class_found = False
@@ -135,6 +153,8 @@ class HTMLParser:
 
         if (not tag.parent):
             return tag.name
+
+        direct_child = True
 
         parent_part = tag.parent.name
         tag_part = tag.name
@@ -148,6 +168,12 @@ class HTMLParser:
             else:
                 container_classes = self.find_container_class(tag)
                 if (container_classes):
+                    #parent_part = p.name
+                    elder = self.find_tag_from_classes(container_classes)
+                    if (tag.parent.name != elder.name):
+                        direct_child = False
+                        parent_part = elder.name
+                    
                     parent_part += "." + ".".join(container_classes)
         except (AttributeError):
             pass
@@ -160,6 +186,11 @@ class HTMLParser:
             else:
                 container_ids = self.find_container_id(tag)
                 if (container_ids):
+                    #parent_part = p.name
+                    elder = self.find_tag_from_id(container_ids)
+                    if (elder.name != tag.parent.name):
+                        direct_child = False
+                        parent_part = elder.name
                     parent_part += "#" + "".join(container_ids)
         except (AttributeError):
             pass
@@ -169,7 +200,10 @@ class HTMLParser:
         elif (parent_part == None):
             key = tag_part
         else:
-            key = parent_part + " > " + tag_part
+            if (direct_child):
+                key = parent_part + " > " + tag_part
+            else:
+                key = parent_part + " " + tag_part
 
         return key
 
